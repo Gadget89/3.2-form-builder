@@ -6,30 +6,24 @@ document.addEventListener("DOMContentLoaded", function(){
     var xhrData = this.response;
     var formData = JSON.parse(xhrData);
 
-    var inputElement = document.querySelector("[data-js='body']");
+    var inputElement = document.querySelector("[data-js='form']");
+
+    var allInputData = "";
 
     formData.forEach(function(arrayObject){
-      //var arraySearch = arrayObject.label;
-      var finalForm = "";
-
-      if (arrayObject.type === "text"{
-        finalForm += `<text>`;
-      })
-
-      if (formData.type === "select"){
-        finalForm += `<select>`;
-        formData.options.forEach(function(optionData){
-          finalForm += `<option label="${optionData.label}"
-          value="${optionData.id}" icon="${options.icon}">`;
-        });
-        console.log();
-      }else {
-        return"it works";
-      }
-
-      var eachObject = `<input type="${arrayObject.type}" id="${arrayObject.id}">`;
-      console.log(eachObject);
-    })
-  })
-  xhr.send();
-})
+      var arrayObjectPin = "";
+      if (arrayObject.type === "select"){
+        arrayObjectPin += `<select>`;
+        arrayObject.options.forEach(function(optionData){
+          arrayObjectPin += `<option label="${optionData.label}" value="${optionData.value}"</option>`;
+        })
+    }else{
+      arrayObjectPin += `<label>${arrayObject.label}</label>`;
+      arrayObjectPin += `<input class="textInput" type="${arrayObject.type}" id="${arrayObject.id}" icon="${arrayObject.icon}">`;
+    }
+    allInputData += arrayObjectPin;
+  });
+  inputElement.innerHTML += allInputData;
+});
+xhr.send();
+});
